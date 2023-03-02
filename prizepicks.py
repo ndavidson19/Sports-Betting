@@ -5,7 +5,7 @@ import sqlite3
 
 
 import pandas as pd
-
+from env import PRIZEPICKS_USER, PRIZEPICKS_PASSWORD
 
 # Initialize the webdriver
 driver = webdriver.Chrome()
@@ -18,8 +18,8 @@ username_input = driver.find_element('id', "email-input")
 password_input = driver.find_element('css selector', "input[type='password']")
 
 # Enter your login credentials
-username_input.send_keys("nrddodger@gmail.com")
-password_input.send_keys("motdic-guckyx-Pitvi3")
+username_input.send_keys(PRIZEPICKS_USER)
+password_input.send_keys(PRIZEPICKS_PASSWORD)
 
 # Submit the login form
 password_input.send_keys(Keys.RETURN)
@@ -36,9 +36,10 @@ for projection in driver.find_elements('class name', "projection"):
     name.append(projection.find_element('class name', "name").text)
     points.append(projection.find_element('class name', "score").text)
 
-
 print(name, points)
 print(len(name), len(points))
+
+points[0] = '21.5'
 
 df = pd.DataFrame({'player_name': name, 'points': points})
 
@@ -62,6 +63,3 @@ conn.close()
 
 # Close the webdriver
 driver.quit()
-
-
-

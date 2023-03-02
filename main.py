@@ -65,8 +65,11 @@ def main():
 
     # sort by highest over and under expected values
     joined_df = joined_df.sort_values(by=['Over Expected Value', 'Under Expected Value'], ascending=False)
+    pd.max_display_rows = 1000
     print(joined_df)
     
+
+
 
 
 
